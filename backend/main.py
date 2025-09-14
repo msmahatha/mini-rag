@@ -1,4 +1,4 @@
-# backend/main.py
+# backend/main.py - Mini RAG Backend API
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -9,7 +9,7 @@ import os
 import PyPDF2
 import io
 
-app = FastAPI()
+app = FastAPI(title="Mini RAG API", description="Retrieval-Augmented Generation API")
 
 # Demo mode toggle - set to True to use mock pipeline (no API keys required)
 DEMO_MODE = os.getenv("DEMO_MODE", "true").lower() == "true"
