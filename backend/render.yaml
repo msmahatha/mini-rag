@@ -12,9 +12,11 @@ services:
         sync: false
       - key: PINECONE_INDEX_NAME
         sync: false
-      - key: OPENAI_API_KEY
+      - key: GOOGLE_API_KEY
         sync: false
       - key: COHERE_API_KEY
         sync: false
       - key: GROQ_API_KEY
         sync: false
+      - key: DEMO_MODE
+        value: "false"

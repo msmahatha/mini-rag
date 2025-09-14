@@ -208,6 +208,19 @@ Before running the application, you need to set up your API keys:
 4. Ask questions about the content
 5. Verify that citations link to the correct source chunks
 
+## Deployment
+
+For production deployment:
+
+- **Frontend**: Deploy to Netlify
+- **Backend**: Deploy to Render
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions including:
+- Step-by-step deployment guides
+- Environment variable configuration
+- Custom domain setup
+- Troubleshooting tips
+
 ## Evaluation Framework
 
 The application includes a comprehensive evaluation framework with:

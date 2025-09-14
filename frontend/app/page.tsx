@@ -3,6 +3,9 @@
 
 import { useState } from 'react';
 
+// API URL configuration
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 // Define types for our data structures
 interface Source {
   page_content: string;
@@ -68,7 +71,7 @@ export default function Home() {
     formData.append('file', file);
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/upload', {
+      const res = await fetch(`${API_URL}/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -94,7 +97,7 @@ export default function Home() {
     setUploadMessage('');
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/upload-text', {
+      const res = await fetch(`${API_URL}/upload-text`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -125,7 +128,7 @@ export default function Home() {
     setResponse(null);
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/query', {
+      const res = await fetch(`${API_URL}/query`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query }),
