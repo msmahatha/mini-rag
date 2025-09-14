@@ -14,22 +14,11 @@ app = FastAPI()
 # Demo mode toggle - set to True to use mock pipeline (no API keys required)
 DEMO_MODE = os.getenv("DEMO_MODE", "true").lower() == "true"
 
-# Configure CORS for production
-allowed_origins = [
-    "http://localhost:3000",  # Local development
-    "https://localhost:3000",  # Local development with HTTPS
-    "https://mini-rag007.netlify.app",  # Your specific Netlify deployment
-    "https://mini-rag007.netlify.com",  # In case you use custom domain
-]
-
-# Allow all origins in demo mode or for easier testing
-if DEMO_MODE or True:  # Temporarily allow all origins for testing
-    allowed_origins = ["*"]
-
+# Configure CORS - Allow all origins for demo deployment
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
-    allow_credentials=True,
+    allow_origins=["*"],  # Allow all origins for demo
+    allow_credentials=False,  # Set to False when using "*"
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
