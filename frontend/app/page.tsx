@@ -4,7 +4,7 @@
 import { useState } from 'react';
 
 // API URL configuration
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://me-api-playground-v3mx.onrender.com';
 
 // Define types for our data structures
 interface Source {
