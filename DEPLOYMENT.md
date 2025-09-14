@@ -27,9 +27,12 @@ This guide covers deploying the Mini RAG application with the frontend on Netlif
 ```
 Name: mini-rag-backend
 Environment: Python 3
+Root Directory: backend
 Build Command: pip install -r requirements.txt
 Start Command: uvicorn main:app --host 0.0.0.0 --port $PORT
 ```
+
+**Important:** Set the Root Directory to `backend` so Render knows where to find your FastAPI application.
 
 ### Step 3: Set Environment Variables
 
@@ -126,12 +129,18 @@ NEXT_PUBLIC_API_URL=https://your-backend.onrender.com
    - Ensure publish directory is set to `out` (not `.next`)
    - Verify Next.js is configured with `output: 'export'` in `next.config.js`
    - Check that the build completes successfully and creates an `out` folder
+
+2. **Backend 404 Errors on Render**:
+   - Ensure Root Directory is set to `backend` in Render dashboard
+   - Verify the start command is: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+   - Check that `requirements.txt` is in the backend folder
+   - Set DEMO_MODE=true for testing without API keys
    
-2. **CORS Errors**: Ensure your Netlify domain is added to the CORS configuration in `main.py`
+3. **CORS Errors**: Ensure your Netlify domain is added to the CORS configuration in `main.py`
 
-3. **Build Failures**: Check that all dependencies are listed in `requirements.txt` and `package.json`
+4. **Build Failures**: Check that all dependencies are listed in `requirements.txt` and `package.json`
 
-4. **API Connection Issues**: Verify the `NEXT_PUBLIC_API_URL` environment variable is set correctly
+5. **API Connection Issues**: Verify the `NEXT_PUBLIC_API_URL` environment variable is set correctly
 
 ### Logs
 

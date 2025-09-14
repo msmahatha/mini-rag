@@ -3,6 +3,8 @@ services:
   - type: web
     name: mini-rag-backend
     env: python
+    # Specify the backend directory as root
+    rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
@@ -19,4 +21,4 @@ services:
       - key: GROQ_API_KEY
         sync: false
       - key: DEMO_MODE
-        value: "false"
+        value: "true"
