@@ -149,5 +149,6 @@ def read_root():
     return {
         "status": f"Backend is running - {mode_msg}",
         "timestamp": datetime.datetime.now().isoformat(),
-        "version": "v1.1-cohere-fixed"
+        "version": "v1.2-forced-redeploy",
+        "fixes_applied": ["pinecone_768_dims", "cohere_model_param", "cors_all_origins"]
     }
