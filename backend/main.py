@@ -144,4 +144,10 @@ async def handle_query(request: QueryRequest):
 @app.get("/")
 def read_root():
     mode_msg = "Demo Mode - No API keys required!" if DEMO_MODE else "Production Mode"
-    return {"status": f"Backend is running - {mode_msg}"}
+    # Add version info to track deployments
+    import datetime
+    return {
+        "status": f"Backend is running - {mode_msg}",
+        "timestamp": datetime.datetime.now().isoformat(),
+        "version": "v1.1-cohere-fixed"
+    }
