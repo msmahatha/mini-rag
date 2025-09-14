@@ -4,7 +4,7 @@
 import { useState } from 'react';
 
 // API URL configuration
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://mini-rag-1-w8rq.onrender.com';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://mini-rag-gkyl.onrender.com';
 
 // Define types for our data structures
 interface Source {
