@@ -18,13 +18,13 @@ DEMO_MODE = os.getenv("DEMO_MODE", "true").lower() == "true"
 allowed_origins = [
     "http://localhost:3000",  # Local development
     "https://localhost:3000",  # Local development with HTTPS
-    "https://*.netlify.app",  # Netlify deployment
-    "https://*.netlify.com",  # Netlify custom domain
+    "https://mini-rag007.netlify.app",  # Your specific Netlify deployment
+    "https://mini-rag007.netlify.com",  # In case you use custom domain
 ]
 
-# Allow all origins in demo mode for easier testing
-if DEMO_MODE:
-    allowed_origins.append("*")
+# Allow all origins in demo mode or for easier testing
+if DEMO_MODE or True:  # Temporarily allow all origins for testing
+    allowed_origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
