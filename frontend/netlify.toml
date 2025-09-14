@@ -31,10 +31,10 @@
 
 # Environment variables for build
 [context.production.environment]
-  NEXT_PUBLIC_API_URL = "https://mini-rag-backend.onrender.com"
+  NEXT_PUBLIC_API_URL = "https://mini-rag-gkyl.onrender.com"
 
 [context.deploy-preview.environment]
-  NEXT_PUBLIC_API_URL = "https://mini-rag-backend.onrender.com"
+  NEXT_PUBLIC_API_URL = "https://mini-rag-gkyl.onrender.com"
 
 [context.branch-deploy.environment]
-  NEXT_PUBLIC_API_URL = "https://mini-rag-backend.onrender.com"
+  NEXT_PUBLIC_API_URL = "https://mini-rag-gkyl.onrender.com"
