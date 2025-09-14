@@ -111,6 +111,7 @@ def configure_retriever_and_reranker(vectorstore):
     retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 10})
     
     reranker = CohereRerank(
+        model="rerank-english-v3.0",
         cohere_api_key=COHERE_API_KEY,
         top_n=3
     )
