@@ -30,8 +30,8 @@ def estimate_costs(embedding_tokens: int, llm_input_tokens: int, llm_output_toke
     """Estimate costs based on current API pricing (approximate)."""
     # Approximate pricing (as of 2024)
     gemini_embedding_cost_per_1k = 0.0000125  # Gemini text-embedding-004 is much cheaper
-    groq_input_cost_per_1k = 0.0001  # Groq Llama3
-    groq_output_cost_per_1k = 0.0001  # Groq Llama3
+    groq_input_cost_per_1k = 0.0001  # Groq Llama 3.1
+    groq_output_cost_per_1k = 0.0001  # Groq Llama 3.1
     
     embedding_cost = (embedding_tokens / 1000) * gemini_embedding_cost_per_1k
     llm_input_cost = (llm_input_tokens / 1000) * groq_input_cost_per_1k
@@ -106,28 +106,37 @@ def configure_retriever_and_reranker(vectorstore):
     """
     Configures a retriever with a Cohere Rerank compressor.
     - Retriever: Standard vector store retriever (top-k=10)
-    - Reranker: CohereRerank (top_n=3)
+    - Reranker: CohereRerank (top_n=3) - if API key is valid
     """
     retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 10})
     
-    reranker = CohereRerank(
-        model="rerank-english-v3.0",
-        cohere_api_key=COHERE_API_KEY,
-        top_n=3
-    )
-    
-    # The compression retriever will fetch documents and then pass them to the reranker
-    compression_retriever = ContextualCompressionRetriever(
-        base_compressor=reranker, 
-        base_retriever=retriever
-    )
-    return compression_retriever
+    # Check if Cohere API key is available and valid
+    if COHERE_API_KEY and COHERE_API_KEY.strip():
+        try:
+            reranker = CohereRerank(
+                model="rerank-english-v3.0",
+                cohere_api_key=COHERE_API_KEY,
+                top_n=3
+            )
+            
+            # The compression retriever will fetch documents and then pass them to the reranker
+            compression_retriever = ContextualCompressionRetriever(
+                base_compressor=reranker, 
+                base_retriever=retriever
+            )
+            return compression_retriever
+        except Exception as e:
+            print(f"Warning: Cohere reranker failed ({e}), using basic retriever")
+            return retriever
+    else:
+        print("Warning: No Cohere API key found, using basic retriever")
+        return retriever
 
 # 4. LLM & Answering with Citations
 def get_answer(query: str, retriever):
     """
     Generates an answer using an LLM with inline citations.
-    - LLM Provider: Groq (Llama3-8b)
+    - LLM Provider: Groq (Llama 3.1-8b)
     - Handles no-answer cases by instructing the LLM.
     - Tracks tokens and costs.
     """
@@ -154,7 +163,7 @@ def get_answer(query: str, retriever):
         input_variables=["context", "question"]
     )
     
-    llm = ChatGroq(temperature=0, model_name="llama3-8b-8192", groq_api_key=GROQ_API_KEY)
+    llm = ChatGroq(temperature=0, model_name="llama-3.1-8b-instant", groq_api_key=GROQ_API_KEY)
 
     def format_docs(docs):
         # Prepares the context string for the LLM, including citation numbers
