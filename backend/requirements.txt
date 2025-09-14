@@ -1,0 +1,14 @@
+# backend/requirements.txt
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+langchain
+langchain-pinecone
+langchain-openai
+langchain-cohere
+langchain-groq
+langchain-google-genai
+tiktoken
+pypdf2
+python-multipart
