@@ -64,14 +64,16 @@ DEMO_MODE=false
 ```
 Base directory: frontend
 Build command: npm run build
-Publish directory: .next
+Publish directory: out
 ```
+
+**Important:** The publish directory should be `out` (not `.next`) because Next.js is configured for static export.
 
 ### Step 3: Set Environment Variables
 
 In Netlify dashboard, go to Site settings → Environment variables:
 
-```
+```wh
 NEXT_PUBLIC_API_URL=https://your-render-backend-url.onrender.com
 ```
 
@@ -120,9 +122,16 @@ NEXT_PUBLIC_API_URL=https://your-backend.onrender.com
 
 ### Common Issues
 
-1. **CORS Errors**: Ensure your Netlify domain is added to the CORS configuration in `main.py`
-2. **Build Failures**: Check that all dependencies are listed in `requirements.txt` and `package.json`
-3. **API Connection Issues**: Verify the `NEXT_PUBLIC_API_URL` environment variable is set correctly
+1. **Page Not Found (404) on Netlify**: 
+   - Ensure publish directory is set to `out` (not `.next`)
+   - Verify Next.js is configured with `output: 'export'` in `next.config.js`
+   - Check that the build completes successfully and creates an `out` folder
+   
+2. **CORS Errors**: Ensure your Netlify domain is added to the CORS configuration in `main.py`
+
+3. **Build Failures**: Check that all dependencies are listed in `requirements.txt` and `package.json`
+
+4. **API Connection Issues**: Verify the `NEXT_PUBLIC_API_URL` environment variable is set correctly
 
 ### Logs
 

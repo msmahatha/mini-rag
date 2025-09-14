@@ -1,14 +1,14 @@
 [build]
-  # Build command for Next.js
+  # Build command for Next.js static export
   command = "npm run build"
-  # Directory to publish
-  publish = ".next"
+  # Directory to publish (for static export)
+  publish = "out"
 
 [build.environment]
   # Node.js version
   NODE_VERSION = "18"
 
-# Redirects for SPA routing
+# Redirects for SPA routing (for Next.js static export)
 [[redirects]]
   from = "/*"
   to = "/index.html"
